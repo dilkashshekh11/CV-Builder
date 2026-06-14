@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <title>CV Builder - Professional Resume Generator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">CV</div>
+        <div>
+          <div class="brand-title">Professional CV Builder</div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-ghost" type="button" id="btnReset">Reset</button>
+        <a class="btn btn-primary" href="#download">Download</a>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel panel-form" aria-label="CV form">
+        <h2 class="panel-title">Your Details</h2>
+
+        <div class="tabs" role="tablist" aria-label="CV sections">
+          <button class="tab is-active" data-tab="tab-basic" role="tab" aria-selected="true">Basic</button>
+          <button class="tab" data-tab="tab-experience" role="tab" aria-selected="false">Experience</button>
+          <button class="tab" data-tab="tab-education" role="tab" aria-selected="false">Education</button>
+          <button class="tab" data-tab="tab-skills" role="tab" aria-selected="false">Skills</button>
+          <button class="tab" data-tab="tab-projects" role="tab" aria-selected="false">Projects</button>
+          <button class="tab" data-tab="tab-achievements" role="tab" aria-selected="false">Achievements</button>
+          <button class="tab" data-tab="tab-language" role="tab" aria-selected="false">Languages</button>
+          <button class="tab" data-tab="tab-references" role="tab" aria-selected="false">References</button>
+        </div>
+
+
+        <form id="cvForm" class="form" autocomplete="off">
+          <div class="tab-panel is-active" id="tab-basic" role="tabpanel">
+            <div class="grid grid-2">
+              <label class="field">
+                <span class="label">Full Name</span>
+                <input name="fullName" type="text" placeholder="Your name" required />
+              </label>
+              <label class="field">
+                <span class="label">Job Title</span>
+                <input name="jobTitle" type="text" placeholder="Your role / title" />
+              </label>
+            </div>
+
+            <div class="grid grid-3">
+              <label class="field">
+                <span class="label">Phone</span>
+                <input name="phone" type="tel" placeholder="+91 99999 99999" />
+              </label>
+              <label class="field">
+                <span class="label">Email</span>
+                <input name="email" type="email" placeholder="name@email.com" />
+              </label>
+              <label class="field">
+                <span class="label">Location</span>
+                <input name="location" type="text" placeholder="City, Country" />
+              </label>
+            </div>
+
+            <div class="grid grid-2">
+              <label class="field">
+                <span class="label">LinkedIn URL</span>
+                <input name="linkedin" type="url" placeholder="https://linkedin.com/in/username" />
+              </label>
+              <label class="field">
+                <span class="label">GitHub URL</span>
+                <input name="github" type="url" placeholder="https://github.com/username" />
+              </label>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="grid grid-2">
+              <label class="field">
+                <span class="label">Profile Photo (optional)</span>
+                <input name="photo" type="file" accept="image/*" />
+              </label>
+              <div class="photo-preview">
+                <div class="photo-frame" aria-label="photo preview">
+                  <img id="photoPreviewImg" alt="" src="" />
+                  <div id="photoPlaceholder" class="photo-placeholder">No Photo</div>
+                </div>
+                <button class="btn btn-ghost" type="button" id="btnRemovePhoto">Remove photo</button>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+              <label class="field">
+                <span class="label">Professional Summary</span>
+                <textarea name="summary" rows="6" placeholder="Add a short professional summary..."></textarea>
+              </label>
+
+            <div class="grid grid-2">
+              <label class="field">
+                <span class="label">Key Highlights</span>
+                <textarea name="highlights" rows="4" placeholder="Add key points (one per line)..."></textarea>
+              </label>
+              <label class="field">
+                <span class="label">Certifications (optional)</span>
+                <textarea name="certifications" rows="4" placeholder="Add certifications..."></textarea>
+              </label>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="tab-experience" role="tabpanel">
+            <div class="list-header">
+              <div>
+                <div class="list-title">Experience</div>
+              </div>
+              <button class="btn btn-primary" type="button" id="btnAddExperience">+ Add</button>
+            </div>
+
+            <div id="experienceList" class="repeat-list"></div>
+            <template id="experienceTemplate">
+              <div class="repeat-item" data-type="experience">
+                <div class="repeat-actions">
+                  <button type="button" class="icon-btn" data-action="remove" title="Remove">🗑</button>
+                </div>
+
+              <div class="grid grid-2">
+                  <label class="field">
+                    <span class="label">Role / Title</span>
+                    <input name="role" type="text" placeholder="Your role / title" />
+                  </label>
+                  <label class="field">
+                    <span class="label">Company</span>
+                    <input name="company" type="text" placeholder="Company name" />
+                  </label>
+                </div>
+
+                <div class="grid grid-3">
+                  <label class="field">
+                    <span class="label">Start Month/Year</span>
+                    <input name="start" type="text" placeholder="Start month/year" />
+                  </label>
+                  <label class="field">
+                    <span class="label">End Month/Year</span>
+                    <input name="end" type="text" placeholder="End month/year" />
+                  </label>
+                  <label class="field">
+                    <span class="label">Location</span>
+                    <input name="expLocation" type="text" placeholder="Location" />
+                  </label>
+                </div>
+
+                <label class="field">
+                  <span class="label">Responsibilities / Achievements</span>
+                  <textarea name="description" rows="4" placeholder="Add responsibilities/achievements... (one per line)" ></textarea>
+                </label>
+              </div>
+            </template>
+          </div>
+
+          <div class="tab-panel" id="tab-education" role="tabpanel">
+            <div class="list-header">
+              <div>
+                <div class="list-title">Education</div>
+              </div>
+              <button class="btn btn-primary" type="button" id="btnAddEducation">+ Add</button>
+            </div>
+
+            <div id="educationList" class="repeat-list"></div>
+            <template id="educationTemplate">
+              <div class="repeat-item" data-type="education">
+                <div class="repeat-actions">
+                  <button type="button" class="icon-btn" data-action="remove" title="Remove">🗑</button>
+                </div>
+
+                <div class="grid grid-2">
+                  <label class="field">
+                    <span class="label">Degree</span>
+                    <input name="degree" type="text" placeholder="Degree" />
+                  </label>
+                  <label class="field">
+                    <span class="label">Institute</span>
+                    <input name="institute" type="text" placeholder="Institute / College" />
+                  </label>
+                </div>
+
+                <div class="grid grid-3">
+                  <label class="field">
+                    <span class="label">Start Year</span>
+                    <input name="eduStart" type="text" placeholder="Start year" />
+                  </label>
+                  <label class="field">
+                    <span class="label">End Year</span>
+                    <input name="eduEnd" type="text" placeholder="End year" />
+                  </label>
+                  <label class="field">
+                    <span class="label">CGPA / % (optional)</span>
+                    <input name="grade" type="text" placeholder="Grade" />
+                  </label>
+                </div>
+
+                  <label class="field">
+                    <span class="label">Notes (optional)</span>
+                    <textarea name="eduNotes" rows="3" placeholder="Add notes... (optional)" ></textarea>
+                  </label>
+              </div>
+            </template>
+          </div>
+
+          <div class="tab-panel" id="tab-skills" role="tabpanel">
+            <div class="grid grid-2">
+              <label class="field">
+                <span class="label">Technical Skills</span>
+                <textarea name="skills" rows="6" placeholder="React\nJavaScript\nHTML\nCSS\n..."></textarea>
+              </label>
+              <label class="field">
+                <span class="label">Soft Skills (optional)</span>
+                <textarea name="softSkills" rows="6" placeholder="Communication\nTeamwork\nLeadership..."></textarea>
+              </label>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="tab-projects" role="tabpanel">
+            <div class="list-header">
+              <div>
+                <div class="list-title">Projects</div>
+              </div>
+              <button class="btn btn-primary" type="button" id="btnAddProject">+ Add</button>
+            </div>
+
+            <div id="projectsList" class="repeat-list"></div>
+            <template id="projectTemplate">
+              <div class="repeat-item" data-type="project">
+                <div class="repeat-actions">
+                  <button type="button" class="icon-btn" data-action="remove" title="Remove">🗑</button>
+                </div>
+
+                <div class="grid grid-2">
+                  <label class="field">
+                    <span class="label">Project Name</span>
+                    <input name="pname" type="text" placeholder="CV Builder" />
+                  </label>
+                  <label class="field">
+                    <span class="label">Tech Stack</span>
+                    <input name="tech" type="text" placeholder="HTML, CSS, JS" />
+                  </label>
+                </div>
+
+                <label class="field">
+                  <span class="label">Description</span>
+                  <textarea name="pdesc" rows="3" placeholder="Short impact / features..."></textarea>
+                </label>
+
+                <div class="grid grid-2">
+                  <label class="field">
+                    <span class="label">Live URL (optional)</span>
+                    <input name="live" type="url" placeholder="https://..." />
+                  </label>
+                  <label class="field">
+                    <span class="label">GitHub URL (optional)</span>
+                    <input name="repo" type="url" placeholder="https://github.com/..." />
+                  </label>
+                </div>
+              </div>
+            </template>
+          </div>
+
+          <div class="tab-panel" id="tab-achievements" role="tabpanel">
+            <div class="grid grid-2">
+              <label class="field">
+                <span class="label">Achievements (optional)</span>
+                <textarea name="achievements" rows="6" placeholder="Awards, publications, major results..."></textarea>
+              </label>
+              <label class="field">
+                <span class="label">Extra (optional)</span>
+                <textarea name="extras" rows="6" placeholder="Languages, interests, volunteer work..."></textarea>
+              </label>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="tab-language" role="tabpanel">
+            <div class="list-header">
+              <div>
+                <div class="list-title">Languages</div>
+              </div>
+              <button class="btn btn-primary" type="button" id="btnAddLanguage">+ Add</button>
+            </div>
+
+            <div id="languageList" class="repeat-list"></div>
+            <template id="languageTemplate">
+              <div class="repeat-item" data-type="language">
+                <div class="repeat-actions">
+                  <button type="button" class="icon-btn" data-action="remove" title="Remove">🗑</button>
+                </div>
+
+                <div class="grid grid-2">
+                  <label class="field">
+                    <span class="label">Language</span>
+                    <input name="lname" type="text" placeholder="English" />
+                  </label>
+                  <label class="field">
+                    <span class="label">Proficiency</span>
+                    <input name="llevel" type="text" placeholder="Native / Fluent / Professional..." />
+                  </label>
+                </div>
+              </div>
+            </template>
+          </div>
+
+          <div class="tab-panel" id="tab-references" role="tabpanel">
+            <div class="list-header">
+              <div>
+                <div class="list-title">References</div>
+              </div>
+              <button class="btn btn-primary" type="button" id="btnAddReference">+ Add</button>
+            </div>
+
+            <div id="referenceList" class="repeat-list"></div>
+            <template id="referenceTemplate">
+              <div class="repeat-item" data-type="reference">
+                <div class="repeat-actions"> 
+                  <button type="button" class="icon-btn" data-action="remove" title="Remove">🗑</button>
+                </div>
+
+                <div class="grid grid-2">
+                  <label class="field">
+                    <span class="label">Reference Name</span>
+                    <input name="rname" type="text" placeholder="Dr. John Smith" />
+                  </label>
+                  <label class="field">
+                    <span class="label">Designation</span>
+                    <input name="rtitle" type="text" placeholder="Professor / Manager..." />
+                  </label>
+                </div>
+
+                <div class="grid grid-2">
+                  <label class="field">
+                    <span class="label">Phone (optional)</span>
+                    <input name="rphone" type="tel" placeholder="+91 99999 99999" />
+                  </label>
+                  <label class="field">
+                    <span class="label">Email (optional)</span>
+                    <input name="remail" type="email" placeholder="email@domain.com" />
+                  </label>
+                </div>
+
+                <label class="field">
+                  <span class="label">Relationship / Context (optional)</span>
+                  <input name="rcontext" type="text" placeholder="Was my mentor at..." />
+                </label>
+              </div>
+            </template>
+          </div>
+
+          <div class="tab-panel" id="tab-design" role="tabpanel" style="display:none">
+
+            <div class="grid grid-2">
+              <label class="field">
+                <span class="label">Theme Color</span>
+                <select name="theme" id="themeSelect">
+                  <option value="#2563eb">Blue</option>
+                  <option value="#16a34a">Green</option>
+                  <option value="#db2777">Pink</option>
+                  <option value="#7c3aed">Purple</option>
+                  <option value="#ea580c">Orange</option>
+                  <option value="#111827">Black</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="label">Layout Style</span>
+                <select name="layout" id="layoutSelect">
+                  <option value="classic">Classic</option>
+                  <option value="sidebar">Sidebar</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="grid grid-2">
+              <label class="field">
+                <span class="label">Font Scale</span>
+                <input name="scale" type="range" min="0.9" max="1.1" step="0.01" value="1" />
+              </label>
+              <label class="field">
+                <span class="label">Show Links</span>
+                <select name="showLinks">
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="divider"></div>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel panel-preview" aria-label="CV preview">
+        <div class="preview-header">
+          <div>
+            <h2 class="panel-title" style="margin:0;">Live Preview</h2>
+          </div>
+          <div class="preview-modes">
+            <button class="btn btn-ghost" type="button" id="btnPrint">Print</button>
+          </div>
+        </div>
+
+        <div class="paper-wrap">
+          <div id="cvPaper" class="paper classic" aria-label="CV paper">
+
+
+            <div class="paper-header">
+              <div class="header-left">
+                <div class="avatar" id="avatarBox">
+                  <img id="avatarImg" alt="" src="" />
+                  <div class="avatar-placeholder" id="avatarPlaceholder">&nbsp;</div>
+                </div>
+              </div>
+
+              <div class="header-center">
+                <h1 id="previewName">Your Name</h1>
+                <div class="title-row">
+                  <div class="job-title" id="previewJob">Job Title</div>
+                </div>
+
+                <div class="contact" id="previewContact">
+                  <span id="previewPhone"></span>
+                  <span class="dot">•</span>
+                  <span id="previewEmail"></span>
+                  <span class="dot">•</span>
+                  <span id="previewLocation"></span>
+                </div>
+
+                <div class="links" id="previewLinks">
+                  <span id="previewLinkedIn" class="link"></span>
+                  <span class="sep"> </span>
+                  <span id="previewGitHub" class="link"></span>
+                </div>
+              </div>
+
+              <div class="header-right">
+                <div class="theme-bar"></div>
+              </div>
+            </div>
+
+            <div class="paper-body">
+              <div class="main">
+                <section class="block" id="blockSummary">
+
+                  <div class="block-title">SUMMARY</div>
+                  <div class="block-content" id="previewSummary"></div>
+                </section>
+
+                <section class="block" id="blockHighlights">
+                  <div class="block-title">HIGHLIGHTS</div>
+                  <div class="block-content" id="previewHighlights"></div>
+                </section>
+
+                <section class="block" id="blockExperience">
+                  <div class="block-title">EXPERIENCE</div>
+                  <div class="block-content" id="previewExperience"></div>
+                </section>
+
+                <section class="block" id="blockAchievements">
+
+                  <div class="block-title">ACHIEVEMENTS</div>
+                  <div class="block-content" id="previewAchievements"></div>
+                </section>
+
+                <section class="block" id="blockProjects">
+                  <div class="block-title">PROJECTS</div>
+                  <div class="block-content" id="previewProjects"></div>
+                </section>
+
+                <section class="block" id="blockLanguages">
+                  <div class="block-title">LANGUAGES</div>
+                  <div class="block-content" id="previewLanguages"></div>
+                </section>
+
+                <section class="block" id="blockReferences">
+                  <div class="block-title">REFERENCES</div>
+                  <div class="block-content" id="previewReferences"></div>
+                </section>
+              </div>
+
+              <aside class="sidebar" id="sidebar">
+
+                <section class="block block-side">
+                  <div class="block-title">SKILLS</div>
+                  <div class="block-content" id="previewSkills"></div>
+                </section>
+
+                <section class="block block-side">
+                  <div class="block-title">EDUCATION</div>
+                  <div class="block-content" id="previewEducation"></div>
+                </section>
+
+                <section class="block block-side">
+                  <div class="block-title">CERTIFICATIONS</div>
+                  <div class="block-content" id="previewCertifications"></div>
+                </section>
+
+                <section class="block block-side">
+                  <div class="block-title">EXTRA</div>
+                  <div class="block-content" id="previewExtras"></div>
+                </section>
+              </aside>
+            </div>
+          </div> 
+        </div>
+
+        <div class="download" id="download">
+          <h3>Download</h3>
+          <div class="download-grid">
+            <button class="btn btn-primary" type="button" id="btnDownloadDoc">Download Word (.doc)</button>
+            <button class="btn btn-ghost" type="button" id="btnDownloadPdf">Download PDF</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">Developed by Dilkash Shekh</footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+ </html>
+
